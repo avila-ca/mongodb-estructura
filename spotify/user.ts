@@ -17,58 +17,33 @@ const userSchema = new mongoose.Schema({
             num_tarjeta: {type: Number, required: true},
             mes: { type: Number, required: true }, 
             anyo: { type: Number, required: true }, 
-        }
-
-    }
-    video_publica: {
-        id_video: {type: ObjectId, required: false },
-        titulo: { type: String, required: true },
-        descripcion: { type: String, required: true },
-        tamanyo: { type: Number, required: true },
-        nombre_archivo: { type: String, required: true },
-        tiempo: { type: Date, required: true },
-        thumbnail: { type: String, required: true },
-        reproducciones_num:{ type: Number, required: true },
-        likes: { type: Number, required: true },
-        dislikes: { type: Number, required: true },
-        estado: {
-            publico: { type: Boolean, required: true },
-            privado: { type: Boolean, required: true },
-            oculto: { type: Boolean, required: true }
+            caducidad: { type: Date, required: true },
+            codigo_seg: { type: Number, required: true }
         },
-        etiqueta: {
-            id_etiqueta: { type: ObjectId, required: true },
-            nombre:  { type: String, required: true },
+        pago: {
+            num_orden:{ type: Number, required: true }, 
+            fecha: { type: Date, required: true }, 
+            total: { type: Number, required: true }
         },
-        comentarios: {
-            id_comentario: {type: ObjectId, required: false },
-            texto: {type: String, required: false },
-            fecha_creacion: { type: Date, required: true },
-            like: [{
-                id_like: { type: ObjectId, required: true },
-                fecha_cracion: { type: Date, required: true }
-            }],
-            dislike: [{
-                id_dislike: { type: ObjectId, required: true },
-                fecha_cracion: { type: Date, required: true }
-            }]
-        }
     },
-    canal: {
-        id_canal: {type: ObjectId, required: false },
-        nombre: { type: String, required: true },
-        descripcion: { type: String, required: true },
-        fecha_creacion: { type: Date, required: true },
-    },
-    suscripcion_canal_id_canal: {type: ObjectId, required: false },
     playlist: {
         id_playlist: {type: ObjectId, required: false },
-        nombre: { type: String, required: true },
+        titulo: {
+            id_usr_insert: { type: String, required: true },
+            id_cancion: { type: String, required: true },
+            fecha_insercion: { type: Date, required: true },
+        },
+        num_canciones: { type: Number, required: true },
         fecha_creacion: { type: Date, required: true },
-        es_publica: { type: Boolean, required: true },
-        videos_id: [{type: ObjectId, required: false }],
+        eliminada: {
+            es_eliminada: {type: Boolean, required: false },
+            fecha_borrado: { type: Date, required: false },
+        },
+    },
+    favoritos:{
+        id_album: [{id_album: { type: ObjectId, required: true }}],
+        id_cancion:[{id_cancion: { type: ObjectId, required: true }}],
+        id_artista:[{id_artista: { type: ObjectId, required: true }}]
     }
-
 });
-
 export default userSchema;
